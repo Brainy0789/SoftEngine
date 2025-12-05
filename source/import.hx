@@ -5,3 +5,5 @@ import flixel.FlxSubState;
 
 import soft.*;
 import soft.backend.*;
+
+using StringTools;

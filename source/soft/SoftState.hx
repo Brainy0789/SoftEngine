@@ -8,9 +8,9 @@ class SoftState extends FlxState
 
     var hscript:HScript;
 
-    public static function switchState(nextState:FlxState)
+    public static function switchState(state:String)
     {
-        FlxG.switchState(nextState);
+        FlxG.switchState(new SoftState(state));
     }
 
     override public function new(state:String)

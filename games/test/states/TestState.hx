@@ -1,0 +1,4 @@
+function create()
+{
+    trace('Test!');
+}

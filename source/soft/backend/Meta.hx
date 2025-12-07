@@ -15,3 +15,13 @@ typedef Meta = {
     @:optional var startFullscreen:Bool;
     var entryState:String;
 }
+
+class Metadata
+{
+    public var data:Meta = null;
+
+    public function new()
+    {
+        data = Paths.getMeta();
+    }
+}

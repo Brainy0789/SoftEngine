@@ -20,4 +20,16 @@ class SoftState extends FlxState
         this.state = state;
         hscript = new HScript(Paths.getGamePath('states/${state}.hx'));
     }
+
+    override public function create()
+    {
+        super.create();
+        hscript.call('create');
+    }
+
+    override public function update(elapsed:Float)
+    {
+        super.update();
+        hscript.call('update', [elapsed]);
+    }
 }

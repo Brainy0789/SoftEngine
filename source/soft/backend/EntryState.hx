@@ -4,10 +4,10 @@ import soft.backend.Meta;
 
 class EntryState extends FlxState
 {
-    override public function new()
+    override public function create()
     {
-        super();
         var meta = new Metadata();
-        SoftState.switchState(meta.data.entryState);
+        Sys.println('Switching state to: ' + meta.data.entryState);
+        SoftG.switchState(meta.data.entryState);
     }
 }

@@ -1,21 +1,42 @@
 package;
 
-import sof.backend.Meta;
+import soft.backend.Meta;
 import haxe.Json;
 import sys.io.File;
 class Paths
 {
     public static var CUR_GAME:String = '';
-    public inline static function getGamePath(dir:String)
-        return 'games/${CUR_GAME}/${dir}';
+    public static function getGamePath(dir:String, parentFolder:String = '')
+    {
+        if (parentFolder != '') parentFolder += '/';
 
+        var path = 'games/${CUR_GAME}/${parentFolder}${dir}';
+        Sys.println(path);
+        return path;
+    }
 
     public inline static function getMeta():Meta
         try {
-            return Json.parse(File.getContent(getGamePath('meta.json')));
+            return Json.parse(getText('meta.json'));
         } catch (e:Dynamic)
         {
             Sys.println('Error getting meta.json!!');
             return null;
         }
+
+    public static function getText(path:String, parentFolder:String = ''):String
+    {
+        var string:String = '';
+
+        var fullPath = getGamePath(path, parentFolder);
+
+        try {
+            string = File.getContent(fullPath);
+        } catch (e:Dynamic)
+        {
+            Sys.println('Error getting text from path: ${fullPath}!');
+        }
+
+        return string;
+    }
 }

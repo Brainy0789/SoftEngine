@@ -1,17 +1,41 @@
 package soft.script;
 
+//wrapper for iris class yippee
+
+import crowplexus.iris.Iris;
+import crowplexus.iris.IrisConfig;
+import sys.io.File;
 class HScript 
 {
     public var path:String = '';
+    public var parentFolder:String = '';
+    public var script:String = 'hscript';
     public var iris:Iris = null;
 
-    public function new(path:String)
+    public function new(script:String, path:String='scripts')
     {
-        this.path = path;
+        this.path = '${script}.hx';
+        this.parentFolder = path;
+        this.script = script;
+
+        reload();
+        execute();
     }
 
-    public function call(func:String, ?vars:Array<Dynamic> = [])
+    public function call(func:String, ?vars:Array<Dynamic> = null):Dynamic
     {
+        if (!iris.exists(func)) return null;
+        var finalVars:Array<Dynamic> = vars;
+        if (finalVars == null) finalVars = new Array();
+        return iris.call(func, finalVars);
+    }
 
+    inline public function execute()
+        iris.execute();
+
+    inline public function reload()
+    {
+        var rules:RawIrisConfig = {name: script, autoRun: false, autoPreset: true};
+        iris = new Iris(Paths.getText(path, parentFolder), rules);
     }
 }

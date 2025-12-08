@@ -8,28 +8,29 @@ class SoftState extends FlxState
 
     var hscript:HScript;
 
-    public static function switchState(state:String)
-    {
-        FlxG.switchState(new SoftState(state));
-    }
+    var globals:Map<String, HScript>;
 
     override public function new(state:String)
     {
+        Sys.println('In state: ' + state);
+        this.state = state;
+        hscript = new HScript(state, 'states');
+        hscript.set("game", this);
+
         super();
 
-        this.state = state;
-        hscript = new HScript(Paths.getGamePath('states/${state}.hx'));
+        //hscript.call('create'); //test thing
     }
 
     override public function create()
     {
-        super.create();
         hscript.call('create');
+        super.create();
     }
 
     override public function update(elapsed:Float)
     {
-        super.update();
         hscript.call('update', [elapsed]);
+        super.update(elapsed);
     }
 }

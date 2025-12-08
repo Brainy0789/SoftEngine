@@ -30,12 +30,17 @@ class HScript
         return iris.call(func, finalVars);
     }
 
+    inline public function set(name:String, value:Dynamic, allowOverride:Bool = true)
+    {
+        iris.set(name, value, allowOverride);
+    }
+
     inline public function execute()
         iris.execute();
 
     inline public function reload()
     {
-        var rules:RawIrisConfig = {name: script, autoRun: false, autoPreset: true};
+        var rules:RawIrisConfig = {name: script + '.hx', autoRun: false, autoPreset: true};
         iris = new Iris(Paths.getText(path, parentFolder), rules);
     }
 }

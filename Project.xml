@@ -39,7 +39,8 @@
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 	<haxelib name="flixel-ui" />
-
+	<haxelib name="hscript-iris"/>
+	
 	<!-- ______________________________ Haxedefines _____________________________ -->
 	<haxedef name="hscriptPos"/>
 	

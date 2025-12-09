@@ -36,6 +36,7 @@
 	<source path="source" />
 	<assets path="assets" />
 	<assets path="games" if="USE_LAUNCHER"/>
+	<assets path="libraries" if="LIBRARIES_ALLOWED"/>
 
 	<!-- _______________________________ Libraries ______________________________ -->
 

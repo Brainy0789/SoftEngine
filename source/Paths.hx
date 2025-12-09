@@ -11,7 +11,7 @@ class Paths
     {
         if (parentFolder != '') parentFolder += '/';
 
-        var path = 'games/${CUR_GAME}/${parentFolder}${dir}';
+        var path = #if USE_LAUNCHER 'games/${CUR_GAME}/${parentFolder}${dir}'; #else  'assets/${parentFolder}${dir}' #end
         Sys.println(path);
         return path;
     }
@@ -62,5 +62,31 @@ class Paths
         }
         
         return files;
+    }
+
+    public static function getFolders(dir:String, parentFolder:String = '', dirOverride:String = null):Array<String>
+    {
+        dir = getGamePath(dir, parentFolder);
+
+        if (dirOverride != null) dir = dirOverride;
+
+        var folders = new Array<String>();
+        
+        try
+        {
+            for (folder in FileSystem.readDirectory(dir))
+            {
+                if (FileSystem.isDirectory(dir + "/" + folder))
+                {
+                    folders.push(folder);
+                }
+            }
+        }
+        catch (e:Dynamic)
+        {
+            trace("Error reading directory: " + dir);
+        }
+        
+        return folders;
     }
 }

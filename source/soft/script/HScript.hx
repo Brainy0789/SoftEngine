@@ -42,5 +42,8 @@ class HScript
     {
         var rules:RawIrisConfig = {name: script + '.hx', autoRun: false, autoPreset: true};
         iris = new Iris(Paths.getText(path, parentFolder), rules);
+
+        //now exposed variables go here
+        iris.set('FlxG', FlxG);
     }
 }

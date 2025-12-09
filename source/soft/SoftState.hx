@@ -10,12 +10,18 @@ class SoftState extends FlxState
 
     var globals:Array<HScript> = new Array();
 
+    public function openSoftSubState(substate:String)
+    {
+        openSubState(new SoftSubState(substate, this));
+    }
+
     override public function new(state:String)
     {
         Sys.println('In state: ' + state);
         this.state = state;
         hscript = new HScript(state, 'states');
         hscript.set("game", this);
+        hscript.set("openSubState", openSoftSubState);
 
         populateGlobals();
 

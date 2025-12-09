@@ -11,6 +11,7 @@ typedef Meta = {
     @:optional var windowName:String; //defaults to game name
     @:optional var windowSize:WindowSize; //Window Size in game, can be changed in code of course.
     @:optional var version:String;
+    @:optional var launcherVersion:String;
     @:optional var author:String;
     @:optional var startFullscreen:Bool;
     var entryState:String;

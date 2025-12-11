@@ -45,5 +45,6 @@ class HScript
 
         //now exposed variables go here
         iris.set('FlxG', FlxG);
+        iris.set('SoftG', SoftG);
     }
 }

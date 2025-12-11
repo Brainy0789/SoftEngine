@@ -21,6 +21,7 @@ class SoftSubState extends FlxSubState
 
     override public function update(elapsed:Float)
     {
+        if (FlxG.keys.justPressed.F6) close();
         hscript.call('update', [elapsed]);
         super.update(elapsed);
     }

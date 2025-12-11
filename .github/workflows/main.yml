@@ -32,11 +32,6 @@ jobs:
           haxelib install flixel-ui
           haxelib install hscript-iris
         shell: cmd
-      - name: Skip SScript setup mode
-        run: echo 'oy9:showMacroty8:loopCosti25y10:includeAllfg' >> %USERPROFILE%/settings.cocoa
-        shell: cmd
-      - name: Create Version Tag
-        run: echo "${{github.run_id}}" > VERSION
       - name: Compile
         run: haxelib run lime build windows
       - name: Publish Artifact

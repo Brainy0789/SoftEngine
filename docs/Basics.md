@@ -23,3 +23,5 @@ games/MYGAME/
 This goes over functions any HScript script can access.
 
 `include(script:String)` - lets you access scripts from your `scripts/` folder.
+
+Scripts functions are callable through `ScriptName.call('funcName', ['arg1, 'arg2])`, variables are accessible through `ScriptName.get('varName')` and `ScriptName.set('varName, 1)`.

@@ -9,6 +9,13 @@ class SoftState extends FlxState
     var hscript:HScript;
 
     var globals:Array<HScript> = new Array();
+    var includes:Array<HScript> = new Array();
+
+    public function include(script:String)
+    {
+        includes.push(new HScript(script));
+        hscript.set(script, includes[length - 1]);
+    }
 
     public function openSoftSubState(substate:String)
     {
@@ -20,8 +27,11 @@ class SoftState extends FlxState
         Sys.println('In state: ' + state);
         this.state = state;
         hscript = new HScript(state, 'states');
+
+        //exposed variables
         hscript.set("game", this);
         hscript.set("openSubState", openSoftSubState);
+        hscript.set('include', include);
 
         populateGlobals();
 
@@ -65,11 +75,11 @@ class SoftState extends FlxState
     {
         globals = new Array();
 
-        var globalsString:Array<String> = Paths.getFilesFromDir('scripts/', 'hx');
+        var globalsString:Array<String> = Paths.getFilesFromDir('globals/', 'hx');
 
         for (script in globalsString)
         {
-            globals.push(new HScript(script));
+            globals.push(new HScript(script, 'globals'));
         }
     }
 }

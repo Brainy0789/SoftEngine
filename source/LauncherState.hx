@@ -15,6 +15,8 @@ class LauncherState extends FlxState
 
     private function setPlaceholderText()
     {
+        if (games.length == 0)
+            placeholderText.text = 'No games installed. Drag a game into the games folder to start!';
         if (!metas.exists(Paths.CUR_GAME)) return;
         var meta = metas.get(Paths.CUR_GAME);
 

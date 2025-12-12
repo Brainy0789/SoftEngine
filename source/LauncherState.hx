@@ -48,7 +48,7 @@ class LauncherState extends FlxState
         placeholderText = new FlxText(0, 64, "");
         placeholderText.setFormat('assets/fonts/vcr.ttf', 32);
 
-        controlText = new FlxText(0, FlxG.height - 64, "Arrow keys/WASD to scroll, space or enter to enter game, R to reload list.");
+        controlText = new FlxText(0, FlxG.height - 64, "Arrow keys/WASD to scroll, space or enter to load game, R to reload list.");
         controlText.setFormat('assets/fonts/vcr.ttf', 16);
         
         add(placeholderText);   
@@ -66,6 +66,7 @@ class LauncherState extends FlxState
         var accept = (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE);
         var back = (FlxG.keys.justPressed.ESCAPE);
         var rel = (FlxG.keys.justPressed.R);
+        var opt = (FlxG.keys.justPressed.TAB);
 
         if (left) changeSelection(-1);
         if (right) changeSelection(1);

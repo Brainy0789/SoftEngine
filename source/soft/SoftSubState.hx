@@ -11,6 +11,7 @@ class SoftSubState extends FlxSubState
         this.substate = substate;
         hscript = new HScript(substate, 'substates');
         hscript.set("substate", this);
+        hscript.execute();
     }
 
     override public function create()

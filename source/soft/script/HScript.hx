@@ -19,7 +19,6 @@ class HScript
         this.script = script;
 
         reload();
-        execute();
     }
 
     public function call(func:String, ?vars:Array<Dynamic> = null):Dynamic
@@ -29,6 +28,9 @@ class HScript
         if (finalVars == null) finalVars = new Array();
         return iris.call(func, finalVars);
     }
+
+    inline public function get(name:String)
+        return iris.get(name);
 
     inline public function set(name:String, value:Dynamic, allowOverride:Bool = true)
     {

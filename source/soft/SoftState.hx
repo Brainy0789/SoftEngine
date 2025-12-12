@@ -9,15 +9,20 @@ class SoftState extends FlxState
     var hscript:HScript;
 
     var globals:Array<HScript> = new Array();
-    var includes:Array<HScript> = new Array();
+    //var includes:Array<HScript> = new Array();
+    //var includeIndex:Int = 0;
 
-    public function include(script:String)
+    //exposed functions yeah
+    public function _include(script:String)
     {
-        includes.push(new HScript(script));
-        hscript.set(script, includes[length - 1]);
+        //includes.push(new HScript(script));
+        //includes[includeIndex].execute();
+        hscript.set(script, new HScript(script));
+        hscript.get(script).execute();
+        //includeIndex++;
     }
 
-    public function openSoftSubState(substate:String)
+    public function _openSubState(substate:String)
     {
         openSubState(new SoftSubState(substate, this));
     }
@@ -29,9 +34,14 @@ class SoftState extends FlxState
         hscript = new HScript(state, 'states');
 
         //exposed variables
+        hscript.set("openSubState", _openSubState);
+        hscript.set('include', _include);
+
+        //multiple ways to access the state itself
         hscript.set("game", this);
-        hscript.set("openSubState", openSoftSubState);
-        hscript.set('include', include);
+        hscript.set("this", this);
+        hscript.set("state", this);
+        hscript.execute();
 
         populateGlobals();
 
@@ -77,9 +87,12 @@ class SoftState extends FlxState
 
         var globalsString:Array<String> = Paths.getFilesFromDir('globals/', 'hx');
 
+        var i = 0;
         for (script in globalsString)
         {
             globals.push(new HScript(script, 'globals'));
+            globals[i].execute();
+            i++;
         }
     }
 }

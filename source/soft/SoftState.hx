@@ -8,19 +8,7 @@ class SoftState extends FlxState
 
     var hscript:HScript;
 
-    var globals:Array<HScript> = new Array();
-    //var includes:Array<HScript> = new Array();
-    //var includeIndex:Int = 0;
-
-    //exposed functions yeah
-    public function _include(script:String)
-    {
-        //includes.push(new HScript(script));
-        //includes[includeIndex].execute();
-        hscript.set(script, new HScript(script));
-        hscript.get(script).execute();
-        //includeIndex++;
-    }
+    var globals:Array<HScript> = new Array();    
 
     public function _openSubState(substate:String)
     {
@@ -35,7 +23,6 @@ class SoftState extends FlxState
 
         //exposed variables
         hscript.set("openSubState", _openSubState);
-        hscript.set('include', _include);
 
         //multiple ways to access the state itself
         hscript.set("game", this);

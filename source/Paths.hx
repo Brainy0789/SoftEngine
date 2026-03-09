@@ -4,9 +4,11 @@ import soft.backend.Meta;
 import haxe.Json;
 import sys.io.File;
 import sys.FileSystem;
+
 class Paths
 {
     public static var CUR_GAME:String = '';
+    
     public static function getGamePath(dir:String, parentFolder:String = '')
     {
         if (parentFolder != '') parentFolder += '/';

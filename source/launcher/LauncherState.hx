@@ -1,11 +1,11 @@
-package;
+package launcher;
 
 import soft.backend.EntryState;
 import soft.backend.Meta;
 
 class LauncherState extends FlxState
 {
-    var games:Array<String> = new Array();
+    public var games:Array<String> = new Array();
     var metas:Map<String, Metadata> = new Map();
 
     var placeholderText:FlxText;
@@ -17,6 +17,7 @@ class LauncherState extends FlxState
     {
         if (games.length == 0)
             placeholderText.text = 'No games installed. Drag a game into the games folder to start!';
+        
         if (!metas.exists(Paths.CUR_GAME)) return;
         var meta = metas.get(Paths.CUR_GAME);
 
@@ -38,6 +39,20 @@ class LauncherState extends FlxState
         super.create();
 
         games = Paths.getFolders('', '', 'games/');
+
+        var userOrder = Order.get_order();
+    
+        games.sort(function(a, b) {
+            var indexA = userOrder.indexOf(a);
+            var indexB = userOrder.indexOf(b);
+
+            if (indexA == -1) indexA = 9999;
+            if (indexB == -1) indexB = 9999;
+
+            return indexA - indexB;
+        });
+
+        Order.order = games;
 
         for (game in games)
         {
@@ -67,12 +82,14 @@ class LauncherState extends FlxState
         var back = (FlxG.keys.justPressed.ESCAPE);
         var rel = (FlxG.keys.justPressed.R);
         var opt = (FlxG.keys.justPressed.TAB);
+        var tab = (FlxG.keys.justPressed.SLASH);
 
         if (left) changeSelection(-1);
         if (right) changeSelection(1);
         if (accept) FlxG.switchState(new EntryState());
         if (back) Sys.exit(0);
         if (rel) reload();
+        if (tab) openSubState(new launcher.ReorderSubState());
     }
 
     public function changeSelection(change:Int = 0)
